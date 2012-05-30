@@ -7,6 +7,7 @@ Group:      System/Libraries
 License:    MIT
 URL:        http://www.x.org
 Source0:    http://xorg.freedesktop.org/releases/individual/lib/%{name}-%{version}.tar.gz
+Source1001: packaging/libxxf86vm.manifest 
 Requires(post): /sbin/ldconfig
 Requires(postun): /sbin/ldconfig
 BuildRequires:  pkgconfig(x11)
@@ -38,6 +39,7 @@ Extension development library for the XFree86-VidMode X extension
 
 
 %build
+cp %{SOURCE1001} .
 export LDFLAGS+=" -Wl,--hash-style=both -Wl,--as-needed"
 
 %reconfigure --disable-static
@@ -59,6 +61,7 @@ rm -rf %{buildroot}
 
 
 %files
+%manifest libxxf86vm.manifest
 %defattr(-,root,root,-)
 # FIXME: missing some of these files %doc AUTHORS COPYING README INSTALL ChangeLog
 %doc COPYING ChangeLog
@@ -67,6 +70,7 @@ rm -rf %{buildroot}
 
 
 %files devel
+%manifest libxxf86vm.manifest
 %defattr(-,root,root,-)
 %{_libdir}/libXxf86vm.so
 %{_libdir}/pkgconfig/xxf86vm.pc
