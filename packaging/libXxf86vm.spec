@@ -31,6 +31,9 @@ X.Org X11 libXxf86vm development package
 make %{?jobs:-j%jobs}
 
 %install
+rm -rf $RPM_BUILD_ROOT
+mkdir -p %{buildroot}/usr/share/license
+cp -af COPYING %{buildroot}/usr/share/license/%{name}
 make install DESTDIR=$RPM_BUILD_ROOT INSTALL="install -p"
 find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 
@@ -41,6 +44,7 @@ find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
+/usr/share/license/%{name}
 %doc README COPYING ChangeLog
 %{_libdir}/libXxf86vm.so.1
 %{_libdir}/libXxf86vm.so.1.0.0
